@@ -11,7 +11,7 @@ dp = Dispatcher()
 
 @dp.message(CommandStart())
 async def start_cmd(message: types.Message):
-    await message.answer("Привет! Я твой бот, и я успешно запустился на Railway! 🎉")
+    await message.answer("Привет! Я твой бот, и я наконец-то работаю на Railway! 🎉")
 
 async def main():
     print("Бот запущен...")
