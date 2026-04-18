@@ -1,4 +1,5 @@
 aiogram
-requests
-python-dotenv
 apscheduler
+feedparser
+newspaper3k
+lxml_html_cleam
