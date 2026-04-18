@@ -39,7 +39,7 @@ async def send_news():
 
 async def main():
     # Поставим 1 минуту для теста, потом смените на hours=3
-    scheduler.add_job(send_news, "interval", minutes)
+    scheduler.add_job(send_news, "interval", minutes=30)
     scheduler.start()
     print("Бот запущен!")
     await dp.start_polling(bot)
