@@ -1,25 +1,21 @@
 import os
 import asyncio
 from aiogram import Bot, Dispatcher
-from apscheduler.schedulers.asyncio import AsyncIOScheduler # Библиотека для времени
-
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 TOKEN = os.getenv("BOT_TOKEN")
-# Укажите ваш ID (его можно узнать у бота @myidbot), чтобы бот знал, кому писать
-USER_ID = "@nnn_eeeoooo"
-
+USER_ID = "@nnn_eeeoooo" 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 scheduler = AsyncIOScheduler(timezone="Europe/Moscow")
-
-# Функция, которая будет запускаться по расписанию
 async def send_scheduled_message():
-    await bot.send_message(USER_ID, "Привет! Это ежедневная автоматическая публикация! 🎉")
-
+    try:
+        await bot.send_message(USER_ID, "Привет! Это автоматическая новость 🚀")
+    except Exception as e:
+        print(f"Ошибка: {e}")
 async def main():
-    # Настройка времени: часы (hour) и минуты (minute)
-scheduler.add_job(send_scheduled_message, "interval", seconds=10)   
-scheduler.start()
-    print("Бот запущен, планировщик работает...")
+    scheduler.add_job(send_scheduled_message, "interval", seconds=10)
+    scheduler.start()
+    print("Бот запущен!")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
