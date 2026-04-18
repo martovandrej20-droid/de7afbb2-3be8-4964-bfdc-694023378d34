@@ -14,7 +14,7 @@ async def send_scheduled_message():
     except Exception as e:
         print(f"Ошибка при отправке: {e}")
 async def main():
-    scheduler.add_job(send_scheduled_message, "interval", seconds=10)
+    scheduler.add_job(send_scheduled_message, "interval", hours=3)
     scheduler.start()
     print("Бот запущен!")
     await dp.start_polling(bot)
