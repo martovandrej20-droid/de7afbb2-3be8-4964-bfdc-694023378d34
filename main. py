@@ -5,7 +5,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler # Библиотек
 
 TOKEN = os.getenv("BOT_TOKEN")
 # Укажите ваш ID (его можно узнать у бота @myidbot), чтобы бот знал, кому писать
-USER_ID = "@DeoxyribonucleicBot"
+USER_ID = "@nnn_eeeoooo"
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -17,7 +17,7 @@ async def send_scheduled_message():
 
 async def main():
     # Настройка времени: часы (hour) и минуты (minute)
-scheduler.add_job(send_scheduled_message, "interval", sekond=10)   
+scheduler.add_job(send_scheduled_message, "interval", second=10)   
 scheduler.start()
     print("Бот запущен, планировщик работает...")
     await dp.start_polling(bot)
