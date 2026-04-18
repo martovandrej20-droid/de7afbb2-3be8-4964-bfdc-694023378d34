@@ -17,7 +17,7 @@ async def send_scheduled_message():
 
 async def main():
     # Настройка времени: часы (hour) и минуты (minute)
-scheduler.add_job(send_scheduled_message, "interval", second=10)   
+scheduler.add_job(send_scheduled_message, "interval", seconds=10)   
 scheduler.start()
     print("Бот запущен, планировщик работает...")
     await dp.start_polling(bot)
