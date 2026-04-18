@@ -1,20 +1,26 @@
 import os
 import asyncio
-from aiogram import Bot, Dispatcher, types
-from aiogram.filters import CommandStart
+from aiogram import Bot, Dispatcher
+from apscheduler.schedulers.asyncio import AsyncIOScheduler # Библиотека для времени
 
-# Railway сам подставит токен из ваших Variables
 TOKEN = os.getenv("BOT_TOKEN")
+# Укажите ваш ID (его можно узнать у бота @myidbot), чтобы бот знал, кому писать
+USER_ID = 123456789 
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
+scheduler = AsyncIOScheduler(timezone="Europe/Moscow")
 
-@dp.message(CommandStart())
-async def start_cmd(message: types.Message):
-    await message.answer("Привет! Я твой бот, и я наконец-то работаю на Railway! 🎉")
+# Функция, которая будет запускаться по расписанию
+async def send_scheduled_message():
+    await bot.send_message(USER_ID, "Привет! Это ежедневная автоматическая публикация! 🎉")
 
 async def main():
-    print("Бот запущен...")
+    # Настройка времени: часы (hour) и минуты (minute)
+    scheduler.add_job(send_scheduled_message, "cron", hour=12, minute=0)
+    scheduler.start()
+    
+    print("Бот запущен, планировщик работает...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
